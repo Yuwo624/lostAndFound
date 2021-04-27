@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.yjh.lostAndFound.dao.PickThingsDao">
+    <select id="findAll" resultType="PickThings">
+        select * from tbl_pickthings
+        <where>
+            <if test="type!=null and type!='all'">
+                typeCode=#{type}
+            </if>
+        </where>
+        order by publishTime desc limit #{skipCount},#{pageSize}
+    </select>
+
+    <select id="findCountByType" resultType="long">
+        select count(*) from tbl_pickthings
+        <where>
+            <if test="type!=null and type!='all'">
+                typeCode=#{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllByKeyword" resultType="PickThings">
+        select * from tbl_pickthings
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                name like '%' #{keyword} '%'
+            </if>
+        </where>
+        order by publishTime desc limit #{skipCount},#{pageSize}
+    </select>
+
+    <select id="findCountByKeyword" resultType="int">
+        select count(*) from tbl_pickthings
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                name like '%' #{keyword} '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="findDetailById" resultType="PickThings">
+        select * from tbl_pickthings where id=#{id}
+    </select>
+
+    <select id="findNextByCondition" resultType="PickThings">
+        select * from tbl_pickthings where publishTime &lt; #{publishTime}
+        <if test="keyword!=null and keyword!=''">
+            and name like '%' #{keyword} '%'
+        </if>
+        <if test="type!=null and type!=''">
+            and typeCode=#{type}
+        </if>
+        order by publishTime desc
+        limit 1
+    </select>
+
+    <select id="findPreviousByCondition" resultType="PickThings">
+        select * from tbl_pickthings where publishTime &gt; #{publishTime}
+        <if test="keyword!=null and keyword!=''">
+            and name like '%' #{keyword} '%'
+        </if>
+        <if test="type!=null and type!=''">
+            and typeCode=#{type}
+        </if>
+        order by publishTime asc
+        limit 1
+    </select>
+
+    <update id="updateState">
+        update tbl_pickthings set state=1 where id=#{id}
+    </update>
+
+    <insert id="insert">
+        insert into tbl_pickthings(
+            id,
+            name,
+            pickPlace,
+            pickDate,
+            typeCode,
+            publishTime,
+            description,
+            img,
+            user,
+            state,
+            storagePlace
+
+        )
+        values(
+            #{id},
+            #{name},
+            #{pickPlace},
+            #{pickDate},
+            #{typeCode},
+            #{publishTime},
+            #{description},
+            #{img},
+            #{user},
+            #{state},
+            #{storagePlace}
+      )
+    </insert>
+
+    <select id="findAllByUid" resultType="pickThings">
+        select * from tbl_pickthings where user=#{user}  order by publishTime desc limit #{skipCount},#{pageSize}
+    </select>
+
+    <select id="findCountByUid" resultType="int">
+        select count(*) from tbl_pickthings where user=#{user}
+    </select>
+
+    <delete id="deleteByIds">
+        delete from tbl_pickthings
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

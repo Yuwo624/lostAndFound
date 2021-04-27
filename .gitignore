@@ -1,0 +1,15 @@
+# Project exclude paths
+/01-hello-springMVC/target/
+/02-RequestMapping/target/
+/03-requestParam/target/
+/04-returnValue/target/
+/05-url-pattern/target/
+/06-path/target/
+/07-ssm/target/
+/08-forward-redirect/target/
+/09-exception-handler/target/
+/10-interceptor/target/
+/11-interceptor2/target/
+/12-interceptor-permission/target/
+/13-img-code/target/
+/lostAndFound/target/
