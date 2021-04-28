@@ -32,10 +32,9 @@ public class LoginAndRegisterController {
 
         user.setId(UUIDUtil.getUUID());
         user.setCreateTime(DateTimeUtil.getSysTime());
-        user.setRoleCode("user");
         user.setLoginPwd(MD5Util.getMD5(user.getLoginPwd()));
         user.setWeChat(user.getWeChat());
-
+        user.setRoleCode("user");
 
         if (!((String)session.getAttribute("Valicode")).toLowerCase().equals(code.toLowerCase())){
             map.put("sueccess",false);

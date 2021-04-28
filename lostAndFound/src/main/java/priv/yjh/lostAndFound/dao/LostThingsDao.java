@@ -30,4 +30,6 @@ public interface LostThingsDao {
     int findCountByUid(String user);
 
     int deleteByIds(String[] idArr);
+
+    int updateById(LostThings lostThings);
 }

@@ -30,5 +30,7 @@ public interface LostThingsService {
 
     int queryCountByUid(String user);
 
-    boolean deleteByIds(String[] idArr, int count);
+    boolean deleteByIds(String[] idArr);
+
+    boolean updateById(LostThings lostThings);
 }

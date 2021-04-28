@@ -26,46 +26,93 @@
 			<span>修改密码</span>
 		</header><!-- /header -->
 		<div class="larry-personal-body clearfix changepwd">
-			<form class="layui-form col-lg-4" method="post" action="">
+			<div class="layui-form col-lg-4">
 			 	<div class="layui-form-item">
-					<label class="layui-form-label">用户名</label>
+					<label class="layui-form-label">账号</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="admin" disabled="disabled" >
+					  	<input type="text" name="title" id="loginAct"  autocomplete="off"  class="layui-input layui-disabled" value="${admin.loginAct}" disabled="disabled" >
 					</div>
 				</div>
+
 				<div class="layui-form-item">
 					<label class="layui-form-label">旧密码</label>
-					<div class="layui-input-block">  
-					  	<input type="password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入旧密码">
+					<div class="layui-input-block">
+						<input type="password" id="oldPassword" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
 					</div>
 				</div>
+
 				<div class="layui-form-item">
 					<label class="layui-form-label">新密码</label>
 					<div class="layui-input-block">  
-					  	<input type="password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
+					  	<input type="password" id="newPassword" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入新密码">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">确认密码</label>
 					<div class="layui-input-block">  
-					  	<input type="password" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入确认新密码">
+					  	<input type="password" id="confirmPassword" name="title"  autocomplete="off"  class="layui-input" value="" placeholder="请输入确认新密码">
 					</div>
 				</div>
 				<div class="layui-form-item change-submit">
 					<div class="layui-input-block">
-						<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+						<button class="layui-btn" id="modifyPwd"  lay-filter="demo1">提交修改</button>
+						<button type="button" id="reset" class="layui-btn layui-btn-primary">重置</button>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </section>
-<script type="text/javascript" src="common/layui/layui.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1-min.js"></script>
 <script type="text/javascript">
-	layui.use(['form','upload'],function(){
-         var form = layui.form();
-	});
+	$(function () {
+
+		//清空输入框
+		$("#reset").click(function () {
+			$("#oldPassword").val("");
+			$("#newPassword").val("");
+			$("#confirmPassword").val("");
+		})
+
+		/*修改密码，ajax请求*/
+		$("#modifyPwd").click(function () {
+
+			if ($("#newPassword").val().trim().length<8 || $("#confirmPassword").val().trim().length<8 ||
+					$("#newPassword").val().trim().length>16 || $("#confirmPassword").val().trim().length>16
+			){
+				alert("密码长度不能小于8大于16!!!");
+				return false;
+			}
+
+			if ($("#newPassword").val().trim()=="" || $("#confirmPassword").val().trim()=="" || $("#oldPassword").val().trim()==""){
+				alert("密码输入不能为空！！！");
+				return false;
+			}
+
+			if ($("#newPassword").val().trim()!=$("#confirmPassword").val().trim()){
+				alert("两次密码输入不一致！！！");
+				return false;
+			}
+
+			$.post(
+				"${path}/admin/updatePwd.do",
+				{
+					"loginAct":$("#loginAct").val().trim(),
+					"loginPwd":$("#newPassword").val().trim(),
+					"oldPassword":$("#oldPassword").val().trim()
+				},
+				function (data) {
+					if (data.success){
+					    alert("修改成功，请重新登录！！！");
+					    window.parent.location.href="${path}"+"/admin/login.html";
+					}else{
+						alert(data.msg);
+					}
+				},
+				"json"
+			)
+		})
+	})
 </script>
 </body>
 </html>

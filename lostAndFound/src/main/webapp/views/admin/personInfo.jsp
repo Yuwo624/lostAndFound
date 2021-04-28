@@ -26,32 +26,38 @@
 			<span>个人信息</span>
 		</header><!-- /header -->
 		<div class="larry-personal-body clearfix">
-			<form class="layui-form col-lg-5" action="" method="post">
+			<form class="layui-form col-lg-5">
 				<div class="layui-form-item">
-					<label class="layui-form-label">用户名</label>
+					<label class="layui-form-label">账号</label>
 					<div class="layui-input-block">  
-						<input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="admin" disabled="disabled" >
+						<input type="text" name="loginAct" id="loginAct"  autocomplete="off"  class="layui-input layui-disabled" value="${admin.loginAct}" disabled="disabled" >
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">所属角色</label>
 					<div class="layui-input-block">
-						<input type="text" name="username"  autocomplete="off" class="layui-input layui-disabled" value="超级管理员" disabled="disabled">
+						<input type="text" name="roleCode"  autocomplete="off" class="layui-input layui-disabled" value="${admin.roleCode}" disabled="disabled">
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">真实姓名</label>
+					<label class="layui-form-label">昵称</label>
 					<div class="layui-input-block">
-						<input type="text" name="username"  autocomplete="off" class="layui-input" value="Larry">
+						<input type="text" name="nickname" id="nickname"  autocomplete="off" class="layui-input" value="${admin.nickname}">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">手机号码</label>
 					<div class="layui-input-block">
-						<input type="text" name="username"  autocomplete="off" class="layui-input" placeholder="输入手机号码">
+						<input type="text" id="phone" name="phone" value="${admin.phone}"  autocomplete="off" class="layui-input" placeholder="输入手机号码">
 					</div>
 				</div>
 				<div class="layui-form-item">
+					<label class="layui-form-label">微信</label>
+					<div class="layui-input-block">
+						<input type="text" id="weChat" name="weChat" value="${admin.weChat}"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<!--<div class="layui-form-item">
 					<label class="layui-form-label">性别</label>
 					<div class="layui-input-block">
 						<input type="radio" name="sex" value="男" title="男" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
@@ -63,8 +69,8 @@
 					<div class="layui-input-block">
 						<input type="file" name="file" class="layui-upload-file">
 					</div>
-				</div>
-				<div class="layui-form-item">
+				</div>-->
+				<!--<div class="layui-form-item">
 					<label class="layui-form-label">界面语言</label>
 					<div class="layui-input-block">
 						<select name="interest" lay-filter="aihao">
@@ -73,38 +79,59 @@
 							<option value="1">英文</option>
 						</select>
 					</div>
-				</div>
+				</div>-->
 
-				<div class="layui-form-item layui-form-text">
+				<!--<div class="layui-form-item layui-form-text">
 					<label class="layui-form-label">座右铭</label>
 					<div class="layui-input-block">
 						<textarea placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" value="" class="layui-textarea"></textarea>
 					</div>
-				</div>
+				</div>-->
 				
 				<div class="layui-form-item">
 					<div class="layui-input-block">
-						<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+						<button class="layui-btn" type="button" id="update" lay-filter="demo1">提交修改</button>
+						<button type="button" id="reset"  class="layui-btn layui-btn-primary">重置</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
-<script type="text/javascript" src="common/layui/layui.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1-min.js"></script>
 <script type="text/javascript">
-	layui.use(['form','upload'],function(){
-         var form = layui.form();
-         layui.upload({ 
-             url: '' ,//上传接口 
-             success: function(res){
-              //上传成功后的回调 
-              console.log(res) 
-            } 
-         });
 
-	});
+	$(function () {
+		//清空输入框
+		$("#reset").click(function () {
+			$("#nickname").val("");
+			$("#phone").val("");
+			$("#weChat").val("");
+		})
+
+		//更新个人信息
+		$("#update").click(function (){
+		    $.ajax({
+				url:"${path}/admin/updateAdmin.do",
+				type:"post",
+				data:{
+					"loginAct":$("#loginAct").val().trim(),
+					"nickname":$("#nickname").val().trim(),
+					"phone":$("#phone").val().trim(),
+					"weChat":$("#weChat").val().trim()
+				},
+				dataType:"json",
+				success:function (data) {
+					if (data.msg=="success"){
+						window.parent.location.reload();
+					}else{
+					    alert("更新失败");
+					}
+				}
+			})
+		})
+	})
+
 </script>
 </body>
 </html>

@@ -150,15 +150,26 @@ public class LostThingsServiceImpl implements LostThingsService {
     }
 
     @Override
-    public boolean deleteByIds(String[] idArr, int count) {
+    public boolean deleteByIds(String[] idArr) {
 
         boolean flag=false;
 
         int count1=lostThingsDao.deleteByIds(idArr);
 
-        if (count1==count) flag=true;
+        if (count1==idArr.length) flag=true;
 
         return flag;
 
+    }
+
+    @Override
+    public boolean updateById(LostThings lostThings) {
+        boolean flag=false;
+
+        int count=lostThingsDao.updateById(lostThings);
+
+        if (count==1) flag=true;
+
+        return flag;
     }
 }

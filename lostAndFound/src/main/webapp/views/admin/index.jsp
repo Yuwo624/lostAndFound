@@ -114,7 +114,7 @@ String path=application.getContextPath()+"/";
                         </a>
                     </dd>
                     <!-- <dd>
-                        <a href="javascript:;" data-url="myloginfo.jsp">
+                        <a href="javascript:;" data-url="userList.jsp">
                             <i class="iconfont icon-piliangicon" data-icon='icon-piliangicon'></i>
                             <span>日志信息</span>
                         </a>
@@ -129,7 +129,7 @@ String path=application.getContextPath()+"/";
 					   <em class="layui-nav-more"></em>
 					</a>
 					    <dl class="layui-nav-child">
-					    	<dd>
+					    	<!--<dd>
 					    		<a href="javascript:;" data-url="admin/table.html">
 					    		   <i class="iconfont icon-yonghu1" data-icon='icon-yonghu1'></i>
 					    		   <span>有线条表格</span>
@@ -140,11 +140,11 @@ String path=application.getContextPath()+"/";
 					    		   <i class="iconfont icon-jiaoseguanli4" data-icon='icon-jiaoseguanli4'></i>
 					    		   <span>无线条输入增加内容框</span>
 					    		</a>
-					    	</dd>
+					    	</dd>-->
 					    	<dd>
-					    		<a href="javascript:;" data-url="admin/myLogInfo.html">
+					    		<a href="javascript:;" data-url="admin/userList.html">
 					    		   <i class="iconfont icon-quanxian2" data-icon='icon-quanxian2'></i>
-					    		   <span>无线条表格</span>
+					    		   <span>用户列表</span>
 					    		</a>
 					    	</dd>
 					    </dl>
@@ -153,53 +153,22 @@ String path=application.getContextPath()+"/";
 			<li class="layui-nav-item">
 					<a href="javascript:;">
 					   <i class="iconfont icon-liebiaoye_liebiao" ></i>
-					   <span>物品管理</span>
+					   <span>失物管理</span>
 					   <em class="layui-nav-more"></em>
 					</a>
 					   <dl class="layui-nav-child">
-					   	   <dd>
-					    		<a href="javascript:;" data-url="admin/404.html">
-					    		   <i class="iconfont icon-lanmuguanli" data-icon='icon-lanmuguanli'></i>
-					    		   <span>404页面</span>
-					    		</a>
-					    	</dd>
 					    	<dd>
-					    		<a href="javascript:;">
+					    		<a href="javascript:;" data-url="admin/findList.html">
 					    		   <i class="iconfont icon-wenzhang2" data-icon='icon-wenzhang2'></i>
-					    		   <span>所有档案列表</span>
+					    		   <span>招领列表</span>
 					    		</a>
 					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-icon1" data-icon='icon-icon1'></i>
-					    		   <span>待审核的档案</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-word" data-icon='icon-word'></i>
-					    		   <span>我发布的文档</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-pinglun1" data-icon='icon-pinglun1'></i>
-					    		   <span>评论管理</span>
-					    		</a>
-					    	</dd>
-					    	
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-tags1" data-icon='icon-tags1'></i>
-					    		   <span>TAGS管理</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-huishouzhan1" data-icon='icon-huishouzhan1'></i>
-					    		   <span>内容回收站</span>
-					    		</a>
-					    	</dd>
+						   <dd>
+							   <a href="javascript:;" data-url="admin/lostList.html">
+								   <i class="iconfont icon-wenzhang2" data-icon='icon-wenzhang2'></i>
+								   <span>寻物列表</span>
+							   </a>
+						   </dd>
 					   </dl>
 			   </li>
 			
@@ -214,53 +183,13 @@ String path=application.getContextPath()+"/";
                            <dd>
                            	   <a href="javascript:;" data-url="admin/404.html">
 					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-					              <span>404提示页面</span>
-					           </a>
-                           </dd>
-                           <dd>
-                           	   <a href="javascript:;" data-url="admin/tab.html">
-					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-					              <span>选项卡页面</span>
+					              <span>用户权限</span>
 					           </a>
                            </dd>
                     </dl>
 				</li>
 				
-				<!-- <li class="layui-nav-item">
-					<a href="javascript:;">
-					   <i class="iconfont icon-shengchengbaogao" ></i>
-					   <span>网站维护</span>
-					   <em class="layui-nav-more"></em>
-					</a>
-					   <dl class="layui-nav-child">
-                           <dd>
-                           	   <a href="javascript:;">
-					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-					              <span>网站主题</span>
-					           </a>
-                           </dd>
-                           <dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-database" data-icon='icon-database'></i>
-					    		   <span>数据库管理</span>
-					    		</a>
-					    	</dd>
-					   	    <dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-shengchengbaogao" data-icon='icon-shengchengbaogao'></i>
-					    		   <span>生成页面</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-qingchuhuancun" data-icon='icon-qingchuhuancun'></i>
-					    		   <span>更新缓存</span>
-					    		</a>
-					    	</dd>
-					    	
-					   </dl>
-				</li> -->
-				
+
 			<!-- 系统设置 -->
 			<li class="layui-nav-item">
 					<a href="javascript:;">
@@ -272,45 +201,10 @@ String path=application.getContextPath()+"/";
 					    	<dd>
 					    		<a href="javascript:;">
 					    		   <i class="iconfont icon-zhandianpeizhi" data-icon='icon-zhandianpeizhi'></i>
-					    		   <span>基本参数设置</span>
+					    		   <span>系统公告</span>
 					    		</a>
 					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-zhandianguanli1" data-icon='icon-zhandianguanli1'></i>
-					    		   <span>多站点管理</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-anquanshezhi" data-icon='icon-anquanshezhi'></i>
-					    		   <span>安全设置</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-sms" data-icon='icon-sms'></i>
-					    		   <span>短信接口设置</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-iconfuzhi01" data-icon='icon-iconfuzhi01'></i>
-					    		   <span>系统日志管理</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    			<i class='iconfont icon-SQLServershujuku' data-icon='icon-SQLServershujuku'></i>
-					    			<span>SQL命令行工具</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    			<i class='iconfont icon-xinxicaiji' data-icon='icon-xinxicaiji'></i>
-					    			<span>防采集管理</span>
-					    		</a>
-					    	</dd>
+
 					    </dl>
 				</li>
 
@@ -348,7 +242,7 @@ String path=application.getContextPath()+"/";
 	<div class="layui-footer layui-larry-foot" id="larry-footer">
 		<div class="layui-mian">  
 		    <p class="p-admin">
-		    	<span>${"thisYear"} &copy;</span>
+		    	<span>${thisYear} &copy;</span>
 		    	 校园失物招领平台
 		    </p>
 		</div>
@@ -359,9 +253,7 @@ String path=application.getContextPath()+"/";
 	<script type="text/javascript" src="static/admin/js/larry.js"></script>
 	<script type="text/javascript" src="static/admin/js/index.js"></script>
 	<script type="text/javascript">
-		$(function () {
 
-		})
 	</script>
 <!-- 锁屏 -->
 <div class="lock-screen" style="display: none;">

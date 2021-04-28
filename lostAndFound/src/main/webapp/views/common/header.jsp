@@ -374,9 +374,9 @@
 					url:"/lostAndFound/login.do",
 					type:"post",
 					data:{
-						"loginAct":$("#Mcard_num").val(),
-						"loginPwd":$("#Mcard_pass").val(),
-						"code":$("#Mcard_code").val()
+						"loginAct":$("#Mcard_num").val().trim(),
+						"loginPwd":$("#Mcard_pass").val().trim(),
+						"code":$("#Mcard_code").val().trim()
 					},
 					dataType: "json",
 					success:function (data) {
@@ -450,7 +450,7 @@
 
 
 			if (registerPhone.trim()=="" || registerPhone.trim().length!=11){
-				$("#Lcph").html("电话号码长度11位");
+				$("#Lcph").html("号码长度为11位");
 				return false;
 			}
 
@@ -458,12 +458,12 @@
 				url:"/lostAndFound/register.do",
 				type:"post",
 				data:{
-					"loginAct":registerAct,
-					"loginPwd":registerPwd,
-					"nickname":registerNickname,
-					"phone":registerPhone,
-					"weChat":registerWeChat,
-					"code":registerCode
+					"loginAct":registerAct.trim(),
+					"loginPwd":registerPwd.trim(),
+					"nickname":registerNickname.trim(),
+					"phone":registerPhone.trim(),
+					"weChat":registerWeChat.trim(),
+					"code":registerCode.trim()
 				},
 				dataType:"json",
 				success:function (data) {

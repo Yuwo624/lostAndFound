@@ -1,6 +1,9 @@
 package priv.yjh.lostAndFound.dao;
 
+import org.apache.ibatis.annotations.Param;
 import priv.yjh.lostAndFound.domain.User;
+
+import java.util.List;
 
 
 public interface UserDao {
@@ -14,7 +17,13 @@ public interface UserDao {
 
     int updateLoginPwd(User user);
 
-    int queryByAct(User user);
+    User queryByAct(String loginAct);
 
     String queryRoleCode(User user);
+
+    List<User> findAll(@Param("skipCount") int skipCount, @Param("pageSize") int pageSize, @Param("keyword") String keyword);
+
+    int findAllCount(String keyword);
+
+    int delete(String[] userIds);
 }

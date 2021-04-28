@@ -9,6 +9,8 @@ import priv.yjh.lostAndFound.domain.User;
 import priv.yjh.lostAndFound.exception.RegisterException;
 import priv.yjh.lostAndFound.service.UserService;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -22,15 +24,44 @@ public class UserServiceImpl implements UserService {
 
         boolean flag=false;
 
-        int count1=userDao.queryByAct(user);
+        User user1=userDao.queryByAct(user.getLoginAct());
 
-        if (count1!=0){
+        if (user1!=null){
             throw new RegisterException("该账号已被注册！");
         }
 
         int count2=userDao.registerUser(user);
 
         if (count2==1) flag=true;
+
+        return flag;
+    }
+
+    //查询所有用户
+    @Override
+    public List<User> queryAll(int skipCount, int pageSize, String keyword) {
+
+        List<User> userList=userDao.findAll(skipCount,pageSize,keyword);
+
+        return userList;
+    }
+
+    //查询用户总数量
+    public int queryAllCount(String keyword){
+        int total=userDao.findAllCount(keyword);
+        return total;
+    }
+
+    @Override
+    public boolean delete(String[] userIds) {
+
+        Boolean flag=false;
+
+        int count1=userIds.length;
+
+        int count2=userDao.delete(userIds);
+
+        if (count1==count2) flag=true;
 
         return flag;
     }
@@ -43,6 +74,8 @@ public class UserServiceImpl implements UserService {
 
         if (user==null){
             throw new LoginException("账号密码错误！！！");
+        }else if (user.getLockState()!=1){
+            throw new LoginException("账号已被冻结，请联系管理员进行申述！！！");
         }
 
         return user;
@@ -77,6 +110,8 @@ public class UserServiceImpl implements UserService {
 
         int count=userDao.updateLoginPwd(user);
 
+        System.out.println("count="+count);
+
         if (count==1) flag=true;
 
         return flag;
@@ -88,11 +123,23 @@ public class UserServiceImpl implements UserService {
         //验证用户是否为普通用户
         String roleCode=userDao.queryRoleCode(user);
 
-        if (!"admin".equals(roleCode)){
+        if (!"admin".equals(roleCode) && !"superAdmin".equals(roleCode)){
             throw new LoginException("普通用户不能进入后台！");
         }
 
         user=userDao.login(user);
+
+        if(user==null){
+            throw new LoginException("账号密码输入错误！！！");
+        }
+
+        return user;
+    }
+
+    @Override
+    public User queryByAct(String loginAct) {
+
+        User user=userDao.queryByAct(loginAct);
 
         return user;
     }

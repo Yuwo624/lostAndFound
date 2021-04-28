@@ -29,4 +29,8 @@ public interface PickThingsDao {
     int findCountByUid(String user);
 
     int deleteByIds(String[] idArr);
+
+    int updateById(PickThings pickThings);
+
+
 }

@@ -46,6 +46,8 @@ public class ApplicationListener implements ServletContextListener {
 		Notice notice=noticeService.queryBySate();
 
 		servletContext.setAttribute("notice",notice);
+
+
 	}
 
 }

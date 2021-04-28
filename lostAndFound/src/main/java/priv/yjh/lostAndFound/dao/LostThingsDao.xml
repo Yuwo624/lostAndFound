@@ -24,7 +24,18 @@
     </select>
 
     <select id="findAllByKeyword" resultType="LostThings">
-        select * from tbl_lostthings
+        select
+        l.id,
+        l.name,
+        l.lostPlace,
+        l.lostDate,
+        l.typeCode,
+        l.publishTime,
+        l.description,
+        u.loginAct as user,
+        l.state,
+        l.img
+        from tbl_lostthings l join tbl_user u on l.user=u.id
         <where>
             <if test="keyword!=null and keyword!=''">
                 name like '%' #{keyword} '%'
@@ -117,4 +128,8 @@
             #{id}
         </foreach>
     </delete>
+
+    <update id="updateById">
+        update tbl_lostthings set name=#{name},lostDate=#{lostDate},lostPlace=#{lostPlace},state=#{state} where id=#{id}
+    </update>
 </mapper>

@@ -29,5 +29,7 @@ public interface PickThingsService {
 
     int queryCountByUid(String user);
 
-    boolean deleteByIds(String[] idArr, int count);
+    boolean deleteByIds(String[] idArr);
+
+    boolean updateById(PickThings pickThings);
 }

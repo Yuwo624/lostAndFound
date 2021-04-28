@@ -83,11 +83,17 @@ public class UserController {
     }
 
     //更新用户信息
-    @RequestMapping("/updateUser.do")
+    @RequestMapping(value={"/updateUser.do"})
     @ResponseBody
     public Map<String,Object> updateUser(User user, HttpSession session){
         Map<String, Object> map = new HashMap<String, Object>();
-        if(userService.update(user)) {
+
+        boolean flag=userService.update(user);
+
+        if(flag) {
+            //重新获取user，
+            user=userService.queryByAct(user.getLoginAct());
+            System.out.println(user.getNickname());
             map.put("msg", "success");
             session.setAttribute("user",user);
         } else {
@@ -164,10 +170,9 @@ public class UserController {
     public Map<String,Boolean> deleteFindInfo(String ids){
         //获取id数组
         String[] idArr=ids.split(",");
-        //获取删除条数
-        int count=idArr.length;
 
-        boolean success=pickThingsService.deleteByIds(idArr,count);
+
+        boolean success=pickThingsService.deleteByIds(idArr);
 
         Map<String,Boolean> map=new HashMap<>();
 
@@ -207,10 +212,8 @@ public class UserController {
     public Map<String,Boolean> deleteLostInfo(String ids){
         //获取id数组
         String[] idArr=ids.split(",");
-        //获取删除条数
-        int count=idArr.length;
 
-        boolean success=lostThingsService.deleteByIds(idArr,count);
+        boolean success=lostThingsService.deleteByIds(idArr);
 
         Map<String,Boolean> map=new HashMap<>();
 

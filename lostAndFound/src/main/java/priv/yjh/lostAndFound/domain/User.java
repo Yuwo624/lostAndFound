@@ -10,6 +10,15 @@ public class User {
     private String roleCode;
     private String createTime;
     private String weChat;
+    private Integer lockState;
+
+    public Integer getLockState() {
+        return lockState;
+    }
+
+    public void setLockState(Integer lockState) {
+        this.lockState = lockState;
+    }
 
     public String getWeChat() {
         return weChat;

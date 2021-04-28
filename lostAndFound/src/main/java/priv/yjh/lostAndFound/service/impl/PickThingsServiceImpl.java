@@ -156,13 +156,25 @@ public class PickThingsServiceImpl implements PickThingsService {
 
     //根据id数组删除记录
     @Override
-    public boolean deleteByIds(String[] idArr, int count) {
+    public boolean deleteByIds(String[] idArr) {
 
         boolean flag=false;
 
-        int count1=pickThingsDao.deleteByIds(idArr);
+        int count=pickThingsDao.deleteByIds(idArr);
 
-        if (count1==count) flag=true;
+        if (idArr.length==count) flag=true;
+
+        return flag;
+    }
+
+    @Override
+    public boolean updateById(PickThings pickThings) {
+
+        boolean flag=false;
+
+        int count=pickThingsDao.updateById(pickThings);
+
+        if (count==1) flag=true;
 
         return flag;
     }

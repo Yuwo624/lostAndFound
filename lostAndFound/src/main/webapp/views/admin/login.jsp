@@ -36,6 +36,12 @@
     		<input type="text" id="code" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">
             <img src="imgCode/code.do" alt="" class="verifyImg" id="verifyImg" onclick="changeCode(this)">
     	</div>
+		<!--更换验证码-->
+		<script type="text/javascript">
+			function changeCode(img) {
+				img.src = "${path}/imgCode/code.do?time=" + new Date().getTime();
+			}
+		</script>
     </div>
     <div class="layui-submit larry-login">
     	<input type="button" value="立即登陆" class="submit_btn"/>
@@ -51,11 +57,6 @@
 <script type="text/javascript">
 $(function(){
 
-	//更换验证码
-	function changeCode(img) {
-		img.src = "${path}/imgCode/code.do?time=" + new Date().getTime();
-	}
-
 	$(".layui-canvs").jParticle({
 		background: "#141414",
 		color: "#E6E6E6"
@@ -66,9 +67,9 @@ $(function(){
 		$.ajax({
 			url:"admin/login.do",
 			data:{
-				"loginAct":$("#loginAct").val(),
-				"loginPwd":$("#loginPwd").val(),
-				"code":$("#code").val()
+				"loginAct":$("#loginAct").val().trim(),
+				"loginPwd":$("#loginPwd").val().trim(),
+				"code":$("#code").val().trim()
 			},
 			dataType:"json",
 			type:"post",
@@ -82,6 +83,7 @@ $(function(){
 		})
 
 	});
+
 });
 </script>
 </body>
