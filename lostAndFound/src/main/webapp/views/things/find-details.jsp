@@ -316,13 +316,13 @@
 	<div style="margin-right:100px;">
 	    <c:choose>
 		<c:when test="${(pickThings.user == user.id) and (pickThings.state != 1)}">
-			<a href="javascript:void(0);" class="btn btn-default pull-right" onclick="showMsg();"  >失主已找到</a>
+			<a href="javascript:void(0);" class="btn btn-default pull-right" onclick="showMsg();"  >失物已归还</a>
 		</c:when>
 		<c:when test="${pickThings.state == 1}">
-			<a href="javascript:void(0);" class="btn btn-success pull-right" style="cursor:default;">此贴已成功</a>
+			<a href="javascript:void(0);" class="btn btn-success pull-right" style="cursor:default;">已归还</a>
 		</c:when>
 		<c:when test="${(pickThings.user != user.id) and (pickThings.state != 1)}">
-			<a href="javascript:void(0);" class="btn btn-default pull-right" onclick="showMsg();" >失物已找到</a>
+			<a href="javascript:void(0);" class="btn btn-default pull-right" onclick="showMsg();" >失主已认领</a>
 		</c:when>
 		</c:choose>
 	</div>

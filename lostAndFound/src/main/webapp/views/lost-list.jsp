@@ -160,7 +160,7 @@
 			<a href="${path}/lost/lost-details.html?id=${lostThing.id}"
 				title="失主在哪:${lostThing.name}">查看详情
 				<c:if test="${lostThing.state == 1}">
-					<i style="display: inline; color: red; font-weight: bold;">成功贴</i>
+					<i style="display: inline; color: red; font-weight: bold;">已找回</i>
 				</c:if>
 			</a>
 			</td>

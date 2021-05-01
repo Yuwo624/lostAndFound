@@ -68,29 +68,53 @@ public class LostThingsServiceImpl implements LostThingsService {
     }
 
     @Override
-    public LostThings queryNextByCondition(String publishTime, String keyword, String type) {
+    public LostThings queryNextByType(String publishTime, String type) {
 
         Map map=new HashMap();
 
         map.put("publishTime",publishTime);
-        map.put("keyword",keyword);
         map.put("type",type);
 
-        LostThings lostThings=lostThingsDao.findNextByCondition(map);
+        LostThings lostThings=lostThingsDao.findNextByType(map);
 
         return lostThings;
     }
 
     @Override
-    public LostThings queryPreviousByCondition(String publishTime, String keyword, String type) {
+    public LostThings queryPreviousByType(String publishTime,  String type) {
+
+        Map map=new HashMap();
+
+        map.put("publishTime",publishTime);
+        map.put("type",type);
+
+        LostThings lostThings=lostThingsDao.findPreviousByType(map);
+
+        return lostThings;
+    }
+
+    @Override
+    public LostThings queryNextByKeyword(String publishTime, String keyword) {
 
         Map map=new HashMap();
 
         map.put("publishTime",publishTime);
         map.put("keyword",keyword);
-        map.put("type",type);
 
-        LostThings lostThings=lostThingsDao.findPreviousByCondition(map);
+        LostThings lostThings=lostThingsDao.findNextByKeyword(map);
+
+        return lostThings;
+    }
+
+    @Override
+    public LostThings queryPreviousByKeyword(String publishTime,  String keyword) {
+
+        Map map=new HashMap();
+
+        map.put("publishTime",publishTime);
+        map.put("keyword",keyword);
+
+        LostThings lostThings=lostThingsDao.findPreviousByKeyword(map);
 
         return lostThings;
     }

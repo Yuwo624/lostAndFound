@@ -16,9 +16,9 @@ public interface PickThingsDao {
 
     PickThings findDetailById(String id);
 
-    PickThings findNextByCondition(Map map);
+    PickThings findNextByType(Map map);
 
-    PickThings findPreviousByCondition(Map map);
+    PickThings findPreviousByType(Map map);
 
     int updateState(String id);
 
@@ -33,4 +33,7 @@ public interface PickThingsDao {
     int updateById(PickThings pickThings);
 
 
+    PickThings findNextByKeyword(Map map);
+
+    PickThings findPreviousByKeyword(Map map);
 }

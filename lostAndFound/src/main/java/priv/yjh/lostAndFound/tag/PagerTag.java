@@ -12,7 +12,7 @@ public class PagerTag extends SimpleTagSupport {
 
 	private Integer curPage;
 	private Integer totalPage;
-	private Integer pageSize = Constants.PAGE_SIZE_15;
+	private Integer pageSize = 10;
 	private Integer totalCount = 0;
 	private String url;
 	private String valueId;
@@ -82,7 +82,6 @@ public class PagerTag extends SimpleTagSupport {
 
 		try {
 			if (pageNumber > 0) {
-				//System.out.println("url: " + url + " " + "pageNum: " + curPage + " " + "pageSize: " + pageSize);
 				// 如果valueId 为null 或 "" 则查询所有
 				if (valueId == null || "".equals(valueId)) {
 					out.print("<script type='text/javascript'>"

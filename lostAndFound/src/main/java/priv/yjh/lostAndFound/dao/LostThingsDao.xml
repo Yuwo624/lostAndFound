@@ -58,25 +58,37 @@
         select * from tbl_lostthings where id=#{id}
     </select>
 
-    <select id="findNextByCondition" resultType="LostThings">
+    <select id="findNextByType" resultType="LostThings">
         select * from tbl_lostthings where publishTime &lt; #{publishTime}
-        <if test="keyword!=null and keyword!=''">
-            and name like '%' #{keyword} '%'
-        </if>
-        <if test="type!=null and type!=''">
-            and typeCode=#{type}
+        <if test="type!=null and type!='' and type!='all'">
+            or typeCode=#{type}
         </if>
         order by publishTime desc
         limit 1
     </select>
 
-    <select id="findPreviousByCondition" resultType="LostThings">
+    <select id="findPreviousByType" resultType="LostThings">
         select * from tbl_lostthings where publishTime &gt; #{publishTime}
+        <if test="type!=null and type!='' and type!='all'">
+            and typeCode=#{type}
+        </if>
+        order by publishTime asc
+        limit 1
+    </select>
+
+    <select id="findNextByKeyword" resultType="LostThings">
+        select * from tbl_lostthings where publishTime &lt; #{publishTime}
         <if test="keyword!=null and keyword!=''">
             and name like '%' #{keyword} '%'
         </if>
-        <if test="type!=null and type!=''">
-            and typeCode=#{type}
+        order by publishTime desc
+        limit 1
+    </select>
+
+    <select id="findPreviousByKeyword" resultType="LostThings">
+        select * from tbl_lostthings where publishTime &gt; #{publishTime}
+        <if test="keyword!=null and keyword!=''">
+            and name like '%' #{keyword} '%'
         </if>
         order by publishTime asc
         limit 1

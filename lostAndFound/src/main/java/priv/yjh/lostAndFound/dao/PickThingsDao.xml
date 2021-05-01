@@ -58,25 +58,37 @@
         select * from tbl_pickthings where id=#{id}
     </select>
 
-    <select id="findNextByCondition" resultType="PickThings">
+    <select id="findNextByType" resultType="PickThings">
         select * from tbl_pickthings where publishTime &lt; #{publishTime}
-        <if test="keyword!=null and keyword!=''">
-            and name like '%' #{keyword} '%'
-        </if>
-        <if test="type!=null and type!=''">
+        <if test="type!=null and type!='' and type!='all'">
             and typeCode=#{type}
         </if>
         order by publishTime desc
         limit 1
     </select>
 
-    <select id="findPreviousByCondition" resultType="PickThings">
+    <select id="findPreviousByType" resultType="PickThings">
         select * from tbl_pickthings where publishTime &gt; #{publishTime}
+        <if test="type!=null and type!='' and type!='all'">
+            and typeCode=#{type}
+        </if>
+        order by publishTime asc
+        limit 1
+    </select>
+
+    <select id="findNextByKeyword" resultType="PickThings">
+        select * from tbl_pickthings where publishTime &lt; #{publishTime}
         <if test="keyword!=null and keyword!=''">
             and name like '%' #{keyword} '%'
         </if>
-        <if test="type!=null and type!=''">
-            and typeCode=#{type}
+        order by publishTime desc
+        limit 1
+    </select>
+
+    <select id="findPreviousByKeyword" resultType="PickThings">
+        select * from tbl_pickthings where publishTime &gt; #{publishTime}
+        <if test="keyword!=null and keyword!=''">
+            and name like '%' #{keyword} '%'
         </if>
         order by publishTime asc
         limit 1

@@ -32,10 +32,14 @@ public class LostThingsController extends BaseController{
     @Autowired
     private LostThingsService lostThingsService;
 
+    //获取所有招领信息，分页
     @RequestMapping("/lost-list.html")
-    public String lostThingsAll(Model model, Map<String, Object> map) {
+    public String lostThingsAll(HttpSession session,Model model, Map<String, Object> map) {
 
         int currentPage = 1;
+
+        //访问当前方法时，说明浏览器页面在按照类型查询页面，将关键字移除
+        session.removeAttribute("keyword");
 
         List<LostThings> lostThingsList = lostThingsService.queryAllByType(currentPage, pageSize, "all");
 
@@ -87,13 +91,17 @@ public class LostThingsController extends BaseController{
     @ResponseBody
     public LostThings nextLostThings(String publishTime, HttpSession session){
 
+        LostThings lostThings=null;
         //获取关键字，判断当前页面是否使用了搜索
         String keyword= (String) session.getAttribute("keyword");
-
         //获取失物类型，判断是否通过类型查询
         String type= (String) session.getAttribute("type");
+        if (keyword!=null && keyword!=""){
+            lostThings=lostThingsService.queryNextByKeyword(publishTime,keyword);
+        }else{
+            lostThings=lostThingsService.queryNextByType(publishTime,type);
+        }
 
-        LostThings lostThings=lostThingsService.queryNextByCondition(publishTime,keyword,type);
 
         return lostThings;
 
@@ -103,14 +111,16 @@ public class LostThingsController extends BaseController{
     @RequestMapping("/lost-details.html/previous.do")
     @ResponseBody
     public LostThings previousLostThings(String publishTime,HttpSession session){
-        //获取关键字，判断当前页面进行了查询
+        LostThings lostThings=null;
+        //获取关键字，判断当前页面是否使用了搜索
         String keyword= (String) session.getAttribute("keyword");
-
         //获取失物类型，判断是否通过类型查询
         String type= (String) session.getAttribute("type");
-
-        LostThings lostThings=lostThingsService.queryPreviousByCondition(publishTime,keyword,type);
-
+        if (keyword!=null && keyword!=""){
+            lostThings=lostThingsService.queryPreviousByKeyword(publishTime,keyword);
+        }else{
+            lostThings=lostThingsService.queryPreviousByType(publishTime,type);
+        }
         return lostThings;
     }
 

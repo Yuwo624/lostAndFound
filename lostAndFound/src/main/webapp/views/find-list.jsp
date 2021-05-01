@@ -144,19 +144,11 @@
 			<td class="limit">${pickThing.name}</td>
 			<td class="limit">${pickThing.pickPlace}</td>
 			<td style="width:90px;">${pickThing.publishTime}</td>
-			<%--<c:choose>
-			<c:when test="${(pickThing.typeCode eq 'card') }">&lt;%&ndash;and (!empty pickThing.thingsNo)&ndash;%&gt;
-			<td class="limit">证卡:<b style="color:red;"> ${pickThing.name} </b>的卡的失主在哪里呢</td>
-			</c:when>
-			<c:otherwise>
-			<td class="limit"><b style="color:red;"> ${pickThing.name} </b>的失主在哪里呢</td>
-			</c:otherwise>
-			</c:choose>--%>
 			<td>
 			<a href="${path}/find/find-details.html?id=${pickThing.id}"
 				title="失主在哪:${pickThing.name}">查看详情
 				<c:if test="${pickThing.state == 1}">
-					<i style="display: inline; color: red; font-weight: bold;">成功贴</i>
+					<i style="display: inline; color: red; font-weight: bold;">已认领</i>
 			    </c:if>
 			</a>
 			</td>

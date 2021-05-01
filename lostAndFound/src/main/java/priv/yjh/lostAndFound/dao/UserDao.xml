@@ -46,10 +46,8 @@
     </select>
 
     <update id="update">
-        update tbl_user set nickname=#{nickname},phone=#{phone},weChat=#{weChat}
-        <if test="lockState!=null and lockState!=''">
-            ,lockState=#{lockState}
-        </if>
+        update tbl_user set nickname=#{nickname},phone=#{phone},weChat=#{weChat},lockState=#{lockState}
+
         where loginAct=#{loginAct}
     </update>
 

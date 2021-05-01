@@ -34,13 +34,18 @@ public class PickThingsController extends BaseController{
 
     // 查询所有pickThings
     @RequestMapping("/find-list.html")
-    public String getPickThingsAll(Model model, Map<String, Object> map) {
+    public String getPickThingsAll(Model model, Map<String, Object> map,HttpSession session) {
 
         //当前页
         int currentPage = 1;
 
 
+        //访问当前方法时，说明浏览器页面在按照类型查询页面，将关键字移除
+        session.removeAttribute("keyword");
+
         String type="all";
+
+        session.setAttribute("type",type);
 
         List<PickThings> pickThingsList = pickThingsService.queryAllByType(currentPage,pageSize,type);
         long totalCount = pickThingsService.queryCountByType(type);
@@ -91,13 +96,20 @@ public class PickThingsController extends BaseController{
     @ResponseBody
     public PickThings nextPickThings(String publishTime, HttpSession session){
 
-        //获取关键字，判断当前页面进行了查询
-        String keyword= (String) session.getAttribute("keyword");
+        PickThings pickThings=null;
 
-        //获取失物类型，判断是否通过类型查询
-        String type= (String) session.getAttribute("type");
+        if (session.getAttribute("keyword")!=null && session.getAttribute("keyword")!=""){
+            //有关键字时，按照关键字进行下一条
+            String keyword= (String) session.getAttribute("keyword");
+            pickThings=pickThingsService.queryNextByKeyword(publishTime,keyword);
+        }else{
+            //获取失物类型，判断是否通过类型查询
+            String type= (String) session.getAttribute("type");
 
-        PickThings pickThings=pickThingsService.queryNextByCondition(publishTime,keyword,type);
+            pickThings=pickThingsService.queryNextByType(publishTime,type);
+        }
+
+
 
         return pickThings;
 
@@ -107,13 +119,19 @@ public class PickThingsController extends BaseController{
     @RequestMapping("/find-details.html/previous.do")
     @ResponseBody
     public PickThings previousPickThings(String publishTime,HttpSession session){
-        //获取关键字，判断当前页面进行了查询
-        String keyword= (String) session.getAttribute("keyword");
 
-        //获取失物类型，判断是否通过类型查询
-        String type= (String) session.getAttribute("type");
+        PickThings pickThings=null;
 
-        PickThings pickThings=pickThingsService.queryPreviousByCondition(publishTime,keyword,type);
+        if (session.getAttribute("keyword")!=null && session.getAttribute("keyword")!=""){
+            //有关键字时，按照关键字进行上一条
+            String keyword= (String) session.getAttribute("keyword");
+            pickThings=pickThingsService.queryPreviousByKeyword(publishTime,keyword);
+        }else{
+            //获取失物类型，判断是否通过类型查询
+            String type= (String) session.getAttribute("type");
+
+            pickThings=pickThingsService.queryPreviousByType(publishTime,type);
+        }
 
         return pickThings;
     }

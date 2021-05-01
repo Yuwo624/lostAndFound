@@ -26,7 +26,6 @@ public class ApplicationListener implements ServletContextListener {
 			也就是说监听中进行注解注入时，监听器已经初始化了，但是bean还没有注入
 		 */
 		ThingsTypeService thingsTypeService= (ThingsTypeService) WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext()).getBean("thingsTypeServiceImpl");
-		NoticeService noticeService= (NoticeService) WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext()).getBean("noticeServiceImpl");
 
 		//获取web应用的根路径
 		ServletContext servletContext = servletContextEvent.getServletContext();
@@ -42,10 +41,6 @@ public class ApplicationListener implements ServletContextListener {
 		//添加类型词典到全局作用域中
 		servletContext.setAttribute("thingsTypeList",list);
 
-		//获取公告
-		Notice notice=noticeService.queryBySate();
-
-		servletContext.setAttribute("notice",notice);
 
 
 	}

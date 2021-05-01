@@ -12,6 +12,7 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+    <!--spring监听器-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -33,10 +34,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>priv.yjh.lostAndFound.web.listener.ApplicationListener</listener-class>
-    </listener>
-
     <!--字符编码过滤器-->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -49,14 +46,26 @@
             <param-name>forceRequestEncoding</param-name>
             <param-value>true</param-value>
         </init-param>
-       <!-- <init-param>
-            <param-name>forceResponseEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>-->
+        <!-- <init-param>
+             <param-name>forceResponseEncoding</param-name>
+             <param-value>true</param-value>
+         </init-param>-->
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <!--全局作用域监听器-->
+    <listener>
+        <listener-class>priv.yjh.lostAndFound.web.listener.ApplicationListener</listener-class>
+    </listener>
+
+    <!--session监听器-->
+    <listener>
+        <listener-class>priv.yjh.lostAndFound.web.listener.SessionListener</listener-class>
+    </listener>
+
+   
 
 </web-app>

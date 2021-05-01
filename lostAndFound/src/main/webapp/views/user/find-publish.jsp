@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html5/loose.dtd">
 <html>
 <head>
-	<title> ${webSiteTitle} 发招领贴页面 </title> 
+	<title> 校园失物招领平台 发招领贴页面 </title>
 	<%@include file="../common/base-meta.jsp"%>
 	<meta name="viewport" content="width=device-width, initial-scale=0.5 maximum-scale=1.0 user-scalable=no"/>
 	<%@include file="../common/base-css-js.jsp"%>
@@ -170,12 +170,12 @@
 	  <td>暂存地点 : </td>
 	   <td>
 	    <input type="text" name="storagePlace" id="storagePlace" value="${pickThings.storagePlace}" onfocus="valueListenerLimiter(this, 15);" onblur="labelHidden(this);" style="width:230px;margin-top:10px;" maxlength="15">
-	    <span style="color:blue;font-size:12px;"></span>
+	    <!--<span style="color:blue;font-size:12px;"></span>
 	    <span id="tel" style="margin-left:10px;display:none;">
 	    	联系人电话: 
 	    	<input type="text" name="phone" id="phone" value="" onfocus="showTelFormater(this);" onblur="onBlurValidTel(this);" style="width:100px;margin-top:10px;text-align:center;">
 	    	<span style="font-size:12px;"></span>
-	    </span>
+	    </span>-->
 	   </td> 
 	  </tr>
 	  <tr>

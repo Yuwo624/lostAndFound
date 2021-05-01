@@ -16,9 +16,9 @@ public interface LostThingsService {
 
     Integer queryCountByKeyword(String keyword);
 
-    LostThings queryNextByCondition(String publishTime, String keyword, String type);
+    LostThings queryNextByType(String publishTime,String type);
 
-    LostThings queryPreviousByCondition(String publishTime, String keyword, String type);
+    LostThings queryPreviousByType(String publishTime, String type);
 
     LostThings queryDetailById(String id);
 
@@ -33,4 +33,8 @@ public interface LostThingsService {
     boolean deleteByIds(String[] idArr);
 
     boolean updateById(LostThings lostThings);
+
+    LostThings queryNextByKeyword(String publishTime, String keyword);
+
+    LostThings queryPreviousByKeyword(String publishTime, String keyword);
 }

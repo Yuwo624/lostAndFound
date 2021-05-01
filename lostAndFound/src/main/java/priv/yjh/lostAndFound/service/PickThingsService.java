@@ -17,9 +17,9 @@ public interface PickThingsService {
 
     PickThings queryDetailById(String id);
 
-    PickThings queryNextByCondition(String publishTime, String keyword, String type);
+    PickThings queryNextByType(String publishTime, String type);
 
-    PickThings queryPreviousByCondition(String publishTime, String keyword, String type);
+    PickThings queryPreviousByType(String publishTime, String type);
 
     boolean modifyState(String id);
 
@@ -32,4 +32,8 @@ public interface PickThingsService {
     boolean deleteByIds(String[] idArr);
 
     boolean updateById(PickThings pickThings);
+
+    PickThings queryNextByKeyword(String publishTime, String keyword);
+
+    PickThings queryPreviousByKeyword(String publishTime, String keyword);
 }

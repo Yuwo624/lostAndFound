@@ -38,10 +38,10 @@ public class IndexController extends BaseController{
         System.out.println("请求转发index.jsp");
 
         //获取遗失物品信息
-        List<LostThings> lostThingsList=lostThingsService.queryAllByType(1,15,"all");
+        List<LostThings> lostThingsList=lostThingsService.queryAllByType(1,pageSize,"all");
 
         //获取捡到物品信息
-        List<PickThings> pickThingsList=pickThingsService.queryAllByType(1,15,"all");
+        List<PickThings> pickThingsList=pickThingsService.queryAllByType(1,pageSize,"all");
 
         //将上面连个参数存到request作用域中
         model.addAttribute("lostThingsList",lostThingsList);
@@ -162,6 +162,9 @@ public class IndexController extends BaseController{
     public Map queryThanksMessageAndTotal(String pageIndex,String pageSize,HttpSession session){
 
         String keyword= (String) session.getAttribute("keyword");
+
+        //相同内容只搜索一次
+        session.removeAttribute("keyword");
 
         Map map=thanksMessageService.queryThanksMessageAndTotal(Integer.valueOf(pageIndex),Integer.valueOf(pageSize),keyword);
 

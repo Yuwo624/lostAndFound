@@ -27,6 +27,7 @@
 		</header><!-- /header -->
 		<div class="larry-personal-body clearfix">
 			<form class="layui-form col-lg-5">
+				<input type="hidden" id="lockState" value="${admin.lockState}">
 				<div class="layui-form-item">
 					<label class="layui-form-label">账号</label>
 					<div class="layui-input-block">  
@@ -118,7 +119,8 @@
 					"loginAct":$("#loginAct").val().trim(),
 					"nickname":$("#nickname").val().trim(),
 					"phone":$("#phone").val().trim(),
-					"weChat":$("#weChat").val().trim()
+					"weChat":$("#weChat").val().trim(),
+					"lockState":$("#lockState").val()
 				},
 				dataType:"json",
 				success:function (data) {

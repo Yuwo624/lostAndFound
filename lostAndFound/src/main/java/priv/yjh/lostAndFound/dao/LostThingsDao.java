@@ -15,9 +15,9 @@ public interface LostThingsDao {
 
     Integer findCountByKeyword(String keyword);
 
-    LostThings findNextByCondition(Map map);
+    LostThings findNextByType(Map map);
 
-    LostThings findPreviousByCondition(Map map);
+    LostThings findPreviousByType(Map map);
 
     LostThings findDetailById(String id);
 
@@ -32,4 +32,8 @@ public interface LostThingsDao {
     int deleteByIds(String[] idArr);
 
     int updateById(LostThings lostThings);
+
+    LostThings findNextByKeyword(Map map);
+
+    LostThings findPreviousByKeyword(Map map);
 }

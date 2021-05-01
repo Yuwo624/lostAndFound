@@ -151,7 +151,7 @@
 						<div class="controls">
 							<input type="text"  id="loginAct"
 								style="height: 5%; margin-top: 3px; margin-right: 3px;"
-								required="required"><span id="Lcn"></span>
+								required="required"><span id="Lcn" style="color: red"></span>
 							<!-- chrom ie11 input bug 5% height fixed it -->
 						</div>
 					</div>
@@ -161,7 +161,7 @@
 						<div class="controls">
 							<input type="password"  id="loginPwd"
 								style="height: 5%; margin-top: 3px; margin-right: 3px;"
-								required="required"><span id="Lcp"></span>
+								required="required"><span id="Lcp" style="color: red"></span>
 						</div>
 					</div>
 
@@ -335,7 +335,7 @@
 					<option value="钱包"></option>
 					<option value="..."></option>
 				</datalist>
-				<button type="submit" class="btn btn-info" title="不搜你不知道，一搜说不定就有">搜索</button>
+				<button type="submit" onclick="checkpost()" class="btn btn-info" title="不搜你不知道，一搜说不定就有">搜索</button>
 			</form>
 			<!-- 站内搜索 end -->
 		</div>
@@ -478,6 +478,20 @@
 
 		/*登录验证*/
 		function login(){
+
+			var loginPwd=$("#loginPwd").val();
+			var loginAct=$("#loginAct").val();
+
+			if (loginAct.trim()==""){
+				$("#Lcn").html("账号不能为空");
+				return false;
+			}
+
+			if (loginPwd.trim()==""){
+				$("#Lcp").html("密码不能为空");
+				return false;
+			}
+
 			$.ajax({
 				url:"/lostAndFound/login.do",
 				type:"post",

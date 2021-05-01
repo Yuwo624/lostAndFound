@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import priv.yjh.lostAndFound.constants.Constants;
 import priv.yjh.lostAndFound.domain.LostThings;
 import priv.yjh.lostAndFound.domain.PickThings;
 import priv.yjh.lostAndFound.domain.User;
@@ -51,7 +52,7 @@ public class AdminController {
 
         try {
             user=userService.adminLogin(user);
-            session.setAttribute("admin",user);
+            session.setAttribute(Constants.ADMIN,user);
             map.put("success",true);
         } catch (LoginException e) {
             e.printStackTrace();

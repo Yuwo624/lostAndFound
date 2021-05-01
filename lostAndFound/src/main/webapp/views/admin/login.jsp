@@ -47,8 +47,7 @@
     	<input type="button" value="立即登陆" class="submit_btn"/>
     </div>
     <div class="layui-login-text">
-    	<!--<p>© 2016-2017 Larry 版权所有</p>
-        <p>鄂xxxxxx</p>-->
+    	<p>© ${thisYear} 校园失物招领平台</p>
     </div>
 </div>
 <script type="text/javascript" src="static/admin/common/layui/lay/dest/layui.all.js"></script>
@@ -61,14 +60,19 @@ $(function(){
 		background: "#141414",
 		color: "#E6E6E6"
 	});
-	//登录链接测试，使用时可删除
+	//登录
 	$(".submit_btn").click(function(){
+		var loginAct=$("#loginAct").val().trim()
+		var loginPwd=$("#loginPwd").val().trim()
+		if (loginAct=="" || loginPwd==""){
+			alert("账号密码不能为空！！！")
+		}
 
 		$.ajax({
 			url:"admin/login.do",
 			data:{
-				"loginAct":$("#loginAct").val().trim(),
-				"loginPwd":$("#loginPwd").val().trim(),
+				"loginAct":loginAct,
+				"loginPwd":loginPwd,
 				"code":$("#code").val().trim()
 			},
 			dataType:"json",

@@ -52,6 +52,14 @@
 
 			//打开创建用户模态窗口
 			$("#createBtn").click(function () {
+
+				//清除历史数据
+				$("#create-loginAct").val(""),
+				$("#create-loginPwd").val(""),
+				$("#create-nickname").val(""),
+				$("#create-phone").val(""),
+				$("#create-wechat").val(""),
+
 				$("#createUser").modal("show")
 			})
 
@@ -76,12 +84,12 @@
 				$.post(
 					"${path}/admin/addUser.do",
 					{
-						"loginAct":$("#create-loginAct").val().trim(),
-						"loginPwd":$("#create-loginPwd").val().trim(),
-						"nickname":$("#create-nickname").val().trim(),
-						"phone":$("#create-phone").val().trim(),
-						"weChat":$("#create-wechat").val().trim(),
-						"roleCode":$("#create-roleCode").val().trim()
+						"loginAct":$.trim($("#create-loginAct").val()),
+						"loginPwd":$.trim($("#create-loginPwd").val()),
+						"nickname":$.trim($("#create-nickname").val()),
+						"phone":$.trim($("#create-phone").val()),
+						"weChat":$.trim($("#create-wechat").val()),
+						"roleCode":$("#create-roleCode").val()
 					},
 					function (data) {
 						if (data.success){
@@ -199,10 +207,10 @@
 						//data:{"success":true/false}
 						if (data.success=="1"){
 							//修改成功后，局部刷新市场活动信息列表
-							pageList($("#activityPage").bs_pagination('getOption','currentPage'),
-									$("#activityPage").bs_pagination('getOption','rowsPerPage'));
+							pageList($("#userPage").bs_pagination('getOption','currentPage'),
+									$("#userPage").bs_pagination('getOption','rowsPerPage'));
 							//修改成功后，关闭修改模态窗口
-							$("#editActivityModal").modal("hide");
+							$("#editUser").modal("hide");
 						}else if(data.success=="2"){
 							alert("当前账号信息已更改，请重新登录");
 							window.parent.location.href="${path}/admin/login.html";

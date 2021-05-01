@@ -86,7 +86,7 @@
 									<font color="#ee5f5b">${pickThing.name}</font> 被捡到了，快来领取吧
 										<c:if test="${pickThing.state == 1}">
 											<p style="display: inline; color: red; font-weight: bold; font-size: 14px; font-style: italic; border-radius: 5px;">
-												成功贴
+												已认领
 											</p>
 										</c:if>
 									</a>
@@ -112,7 +112,7 @@
 								<font color="#ee5f5b">${lostThing.name}</font> 丢失了，捡到的同学速看本贴
 									<c:if test="${lostThing.state == 1}">
 										<p style="display: inline; color: red; font-weight: bold; font-size: 14px; font-style: italic; border-radius: 5px;">
-											成功贴
+											已找回
 										</p>
 									</c:if>
 								</a>

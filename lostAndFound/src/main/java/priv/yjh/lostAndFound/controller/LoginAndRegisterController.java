@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import priv.yjh.lostAndFound.constants.Constants;
 import priv.yjh.lostAndFound.domain.User;
 import priv.yjh.lostAndFound.exception.LoginException;
 import priv.yjh.lostAndFound.exception.RegisterException;
@@ -37,7 +38,7 @@ public class LoginAndRegisterController {
         user.setRoleCode("user");
 
         if (!((String)session.getAttribute("Valicode")).toLowerCase().equals(code.toLowerCase())){
-            map.put("sueccess",false);
+            map.put("success",false);
             map.put("msg","验证码输入有误！！！");
             return  map;
         }
@@ -79,7 +80,7 @@ public class LoginAndRegisterController {
 
         try {
             user=userService.login(user);
-            session.setAttribute("user",user);
+            session.setAttribute(Constants.USER,user);
             map.put("success",true);
             map.put("user",user);
         } catch (LoginException e) {

@@ -78,28 +78,26 @@ public class PickThingsServiceImpl implements PickThingsService {
 
     //通过条件查询下一条
     @Override
-    public PickThings queryNextByCondition(String publishTime, String keyword, String type) {
+    public PickThings queryNextByType(String publishTime, String type) {
 
         Map map=new HashMap();
 
         map.put("publishTime",publishTime);
-        map.put("keyword",keyword);
         map.put("type",type);
 
-        PickThings pickThings=pickThingsDao.findNextByCondition(map);
+        PickThings pickThings=pickThingsDao.findNextByType(map);
         return pickThings;
     }
 
     //通过条件查询上一条
     @Override
-    public PickThings queryPreviousByCondition(String publishTime, String keyword, String type) {
+    public PickThings queryPreviousByType(String publishTime, String type) {
         Map map=new HashMap();
 
         map.put("publishTime",publishTime);
-        map.put("keyword",keyword);
         map.put("type",type);
 
-        PickThings pickThings=pickThingsDao.findPreviousByCondition(map);
+        PickThings pickThings=pickThingsDao.findPreviousByType(map);
         return pickThings;
     }
 
@@ -177,5 +175,30 @@ public class PickThingsServiceImpl implements PickThingsService {
         if (count==1) flag=true;
 
         return flag;
+    }
+
+    @Override
+    public PickThings queryNextByKeyword(String publishTime, String keyword) {
+
+        Map map=new HashMap();
+
+        map.put("publishTime",publishTime);
+        map.put("keyword",keyword);
+
+        PickThings pickThings=pickThingsDao.findNextByKeyword(map);
+
+        return pickThings;
+    }
+
+    @Override
+    public PickThings queryPreviousByKeyword(String publishTime, String keyword) {
+        Map map=new HashMap();
+
+        map.put("publishTime",publishTime);
+        map.put("keyword",keyword);
+
+        PickThings pickThings=pickThingsDao.findPreviousByKeyword(map);
+
+        return pickThings;
     }
 }
