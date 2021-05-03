@@ -58,36 +58,6 @@
 						<input type="text" id="weChat" name="weChat" value="${admin.weChat}"  autocomplete="off" class="layui-input">
 					</div>
 				</div>
-				<!--<div class="layui-form-item">
-					<label class="layui-form-label">性别</label>
-					<div class="layui-input-block">
-						<input type="radio" name="sex" value="男" title="男" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
-						<input type="radio" name="sex" value="女" title="女"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><span>女</span></div>
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">修改头像</label>
-					<div class="layui-input-block">
-						<input type="file" name="file" class="layui-upload-file">
-					</div>
-				</div>-->
-				<!--<div class="layui-form-item">
-					<label class="layui-form-label">界面语言</label>
-					<div class="layui-input-block">
-						<select name="interest" lay-filter="aihao">
-							<option value=""></option>
-							<option value="0" selected="selected">中文</option>
-							<option value="1">英文</option>
-						</select>
-					</div>
-				</div>-->
-
-				<!--<div class="layui-form-item layui-form-text">
-					<label class="layui-form-label">座右铭</label>
-					<div class="layui-input-block">
-						<textarea placeholder="既然选择了远方，便只顾风雨兼程；路漫漫其修远兮，吾将上下而求索" value="" class="layui-textarea"></textarea>
-					</div>
-				</div>-->
 				
 				<div class="layui-form-item">
 					<div class="layui-input-block">

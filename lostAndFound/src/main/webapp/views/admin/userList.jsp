@@ -140,10 +140,13 @@
                                     data
                                         {"success":true/false}
                                  */
-								if(data.success){
+								if(data.success=="1"){
 									//删除成功后,刷新用户列表
 									pageList($("#userPage").bs_pagination('getOption','currentPage'),
 											$("#userPage").bs_pagination('getOption','rowsPerPage'));
+								}else if(data.success=="2"){
+									alert("当前登录账号已被删除，请用新账号登录！！！");
+									window.parent.location.href="${path}/admin/login.html";
 								}else{
 									alert("删除失败");
 								}
@@ -221,6 +224,45 @@
 				})
 			})
 
+			/*重置密码*/
+			$("#resetPwdBtn").click(function () {
+				//获取所有挑√的选项
+				var $xz=$("input[name=dx]:checked");
+
+				if ($xz.length<1){
+					alert("请选择你要重置的账号！！！");
+				}else{
+
+				    /*拼接参数  localhost:8080/lostAndFound?id=1&id=2&id=3..... */
+					var param="";
+				    for(var i=0;i<$xz.length;i++){
+				        param+="userIds="+$($xz[i]).val();
+						/*只要不是最后一个都要加拼接符*/
+						if (i<$xz.length-1){
+							param+="&";
+						}
+					}
+
+				    if(confirm("重置后密码为'00000000'，确认重置密码？")){
+						$.post(
+							"${path}/admin/resetPwd.do?"+param,
+							function (data) {
+								if (data.success=="1"){
+									alert("当前登录账号密码已被重置，请重新登录！！！");
+									window.parent.location.href="${path}/admin/login.html";
+								}else if(data.success=="2"){
+									alert("密码重置成功！！！");
+								}else{
+								    alert("密码重置失败！！！")
+								}
+							},
+							"json"
+						)
+					}
+				}
+
+			})
+
 		})
 
 
@@ -252,7 +294,7 @@
 				data:{
 					"pageNo":pageNo,
 					"pageSize":pageSize,
-					"keyword":$("#keyword").val().trim()
+					"keyword":$.trim($("#keyword").val())
 				},
 				dataType:"json",
 				success:function (data) {
@@ -362,7 +404,7 @@
                     data-dismiss="modal":表示关闭模态窗口
                 -->
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-primary" id="saveBtn">注册</button>
+				<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
 			</div>
 		</div>
 	</div>
@@ -424,7 +466,7 @@
                     data-dismiss="modal":表示关闭模态窗口
                 -->
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-primary" id="updateBtn">修改</button>
+				<button type="button" class="btn btn-primary" id="updateBtn">保存</button>
 			</div>
 		</div>
 	</div>
@@ -447,6 +489,9 @@
 		</div>
 		<div class="layui-inline">
 			<a class="layui-btn audit_btn" id="editBtn">编辑用户</a>
+		</div>
+		<div class="layui-inline">
+			<a class="layui-btn layui-btn-warm" id="resetPwdBtn">重置密码</a>
 		</div>
 		<div class="layui-inline">
 			<a class="layui-btn layui-btn-danger batchDel" id="deleteBtn">删除</a>

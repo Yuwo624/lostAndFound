@@ -36,4 +36,6 @@ public interface LostThingsDao {
     LostThings findNextByKeyword(Map map);
 
     LostThings findPreviousByKeyword(Map map);
+
+    int deleteByUid(String id);
 }

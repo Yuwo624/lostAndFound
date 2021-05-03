@@ -6,6 +6,16 @@ public class Notice {
     private String title;
     private String content;
     private String publishTime;
+    private String createTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     private int state;
 
     public String getId() {

@@ -29,7 +29,7 @@ String path=application.getContextPath()+"/";
 		<div class="layui-main">
 		    <!-- logo区域 -->
 			<div class="admin-logo-box">
-				<a class="logo" href="javascript:void(0)" title="logo">后台管理系统</a>
+				<a class="logo" href="admin/index.html" title="logo">后台管理系统</a>
 				<div class="larry-side-menu">
 					<i class="fa fa-bars" aria-hidden="true"></i>
 				</div>
@@ -38,10 +38,10 @@ String path=application.getContextPath()+"/";
             <div class="layui-larry-menu">
                 <!-- <ul class="layui-nav clearfix">
                        <li class="layui-nav-item layui-this">
-                 	   	   <a href="javascirpt:;"><i class="iconfont icon-wangzhanguanli"></i>内容管理</a>
+                 	   	   <a href="javascirpt:;"><i class="iconfont icon-wangzhanguanli"></i>用户管理</a>
                  	   </li>
                  	   <li class="layui-nav-item">
-                 	   	   <a href="javascirpt:;"><i class="iconfont icon-weixin3"></i>微信公众</a>
+                 	   	   <a href="javascirpt:;"><i class="iconfont icon-weixin3"></i>失物管理</a>
                  	   </li>
                  	   <li class="layui-nav-item">
                  	   	   <a href="javascirpt:;"><i class="iconfont icon-ht_expand"></i>扩展模块</a>
@@ -53,26 +53,6 @@ String path=application.getContextPath()+"/";
             		<li class="layui-nav-item">
             			账户名：<span>${(empty admin.nickname) ? admin.loginAct : admin.nickname}</span>
             		</li>
-            		<!-- <li class="layui-nav-item first">
-						<a href="javascript:;">			
-							<cite>默认站点</cite>
-							<span class="layui-nav-more"></span>
-						</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="">站点1</a>
-							</dd>
-							<dd>
-								<a href="">站点2</a>
-							</dd>
-							
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="javascript:;" id="lock">
-                        <i class="iconfont icon-diannao1"></i>
-						锁屏</a>
-					</li> -->
 					<li class="layui-nav-item">
 						<a href="admin/logout.do" id="logout">
                         <i class="iconfont icon-exit"></i>
@@ -88,7 +68,7 @@ String path=application.getContextPath()+"/";
 		<!-- 左侧菜单 -->
 		<ul class="layui-nav layui-nav-tree">
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;" data-url="adimn/main.html">
+				<a href="javascript:;" data-url="admin/main.html">
 				    <i class="iconfont icon-home1" data-icon='icon-home1'></i>
 					<span>后台首页</span>
 				</a>
@@ -113,12 +93,6 @@ String path=application.getContextPath()+"/";
                             <span>修改密码</span>
                         </a>
                     </dd>
-                    <!-- <dd>
-                        <a href="javascript:;" data-url="userList.jsp">
-                            <i class="iconfont icon-piliangicon" data-icon='icon-piliangicon'></i>
-                            <span>日志信息</span>
-                        </a>
-                    </dd> -->
                 </dl>
 			</li>
 			<!-- 用户管理 -->
@@ -129,18 +103,6 @@ String path=application.getContextPath()+"/";
 					   <em class="layui-nav-more"></em>
 					</a>
 					    <dl class="layui-nav-child">
-					    	<!--<dd>
-					    		<a href="javascript:;" data-url="admin/table.html">
-					    		   <i class="iconfont icon-yonghu1" data-icon='icon-yonghu1'></i>
-					    		   <span>有线条表格</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;"  data-url="admin/table_1.html">
-					    		   <i class="iconfont icon-jiaoseguanli4" data-icon='icon-jiaoseguanli4'></i>
-					    		   <span>无线条输入增加内容框</span>
-					    		</a>
-					    	</dd>-->
 					    	<dd>
 					    		<a href="javascript:;" data-url="admin/userList.html">
 					    		   <i class="iconfont icon-quanxian2" data-icon='icon-quanxian2'></i>
@@ -172,7 +134,7 @@ String path=application.getContextPath()+"/";
 					   </dl>
 			   </li>
 			
-                 <!-- 会员管理 -->
+                 <!-- 权限管理 -->
 				<li class="layui-nav-item">
 					<a href="javascript:;">
 					   <i class="iconfont icon-m-members" ></i>
@@ -181,7 +143,7 @@ String path=application.getContextPath()+"/";
 					</a>
 					<dl class="layui-nav-child">
                            <dd>
-                           	   <a href="javascript:;" data-url="admin/404.html">
+                           	   <a href="javascript:;" data-url="admin/user-power.html">
 					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
 					              <span>用户权限</span>
 					           </a>
@@ -199,14 +161,14 @@ String path=application.getContextPath()+"/";
 					</a>
 					    <dl class="layui-nav-child">
 					    	<dd>
-					    		<a href="javascript:;">
+					    		<a href="javascript:;" data-url="admin/notice-settings.html">
 					    		   <i class="iconfont icon-zhandianpeizhi" data-icon='icon-zhandianpeizhi'></i>
 					    		   <span>系统公告</span>
 					    		</a>
 					    	</dd>
 
 					    </dl>
-				</li>
+			</li>
 
     </ul>
     </div>
@@ -225,7 +187,7 @@ String path=application.getContextPath()+"/";
 				  <li class="layui-nav-item">
 				    <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
 				    <dl class="layui-nav-child">
-					  <dd><a href="javascript:;" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i> 刷新当前</a></dd>
+					  <dd><a href="javascript:;" id="" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i> 刷新当前</a></dd>
 				      <dd><a href="javascript:;" class="closePageOther"><i class="iconfont icon-prohibit"></i> 关闭其他</a></dd>
 				      <dd><a href="javascript:;" class="closePageAll"><i class="iconfont icon-guanbi"></i> 关闭全部</a></dd>
 				    </dl>
@@ -255,20 +217,6 @@ String path=application.getContextPath()+"/";
 	<script type="text/javascript">
 
 	</script>
-<!-- 锁屏 -->
-<div class="lock-screen" style="display: none;">
-	<div id="locker" class="lock-wrapper">
-		<div id="time"></div>
-		<div class="lock-box center">
-			<img src="static/admin/images/userimg.jpg" alt="">
-			<h1>admin</h1>
-			<duv class="form-group col-lg-12">
-				<input type="password" placeholder='锁屏状态，请输入密码解锁' id="lock_password" class="form-control lock-input" autofocus name="lock_password">
-				<button id="unlock" class="btn btn-lock">解锁</button>
-			</duv>
-		</div>
-	</div>
-</div>
 
 </body>
 </html>

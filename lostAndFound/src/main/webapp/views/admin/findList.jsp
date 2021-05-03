@@ -293,7 +293,7 @@
                     data-dismiss="modal":表示关闭模态窗口
                 -->
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-primary" id="updateBtn">修改</button>
+				<button type="button" class="btn btn-primary" id="updateBtn">保存</button>
 			</div>
 		</div>
 	</div>

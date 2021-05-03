@@ -36,4 +36,6 @@ public interface PickThingsDao {
     PickThings findNextByKeyword(Map map);
 
     PickThings findPreviousByKeyword(Map map);
+
+    int deleteByUid(String id);
 }

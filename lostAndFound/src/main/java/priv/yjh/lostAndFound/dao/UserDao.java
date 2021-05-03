@@ -26,4 +26,8 @@ public interface UserDao {
     int findAllCount(String keyword);
 
     int delete(String[] userIds);
+
+    int resetPwd(@Param(value = "userIds") String[] userIds,@Param("loginPwd") String loginPwd);
+
+    int updatePower(User user);
 }

@@ -3,14 +3,17 @@ package priv.yjh.lostAndFound.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import priv.yjh.lostAndFound.constants.Constants;
 import priv.yjh.lostAndFound.domain.LostThings;
+import priv.yjh.lostAndFound.domain.Notice;
 import priv.yjh.lostAndFound.domain.PickThings;
 import priv.yjh.lostAndFound.domain.User;
 import priv.yjh.lostAndFound.exception.LoginException;
 import priv.yjh.lostAndFound.exception.RegisterException;
 import priv.yjh.lostAndFound.service.LostThingsService;
+import priv.yjh.lostAndFound.service.NoticeService;
 import priv.yjh.lostAndFound.service.PickThingsService;
 import priv.yjh.lostAndFound.service.UserService;
 import priv.yjh.lostAndFound.utils.DateTimeUtil;
@@ -18,6 +21,7 @@ import priv.yjh.lostAndFound.utils.MD5Util;
 import priv.yjh.lostAndFound.utils.UUIDUtil;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +38,9 @@ public class AdminController {
 
     @Autowired
     private LostThingsService lostThingsService;
+
+    @Autowired
+    private NoticeService noticeService;
 
     //登录验证
     @RequestMapping("/login.do")
@@ -159,14 +166,14 @@ public class AdminController {
         return "admin/changepwd";
     }
 
-    @RequestMapping("/table.html")
+    @RequestMapping("/user-power.html")
     public String getTableJsp(){
-        return "admin/table";
+        return "admin/user-power";
     }
 
-    @RequestMapping("/table_1.html")
+    @RequestMapping("/notice-settings.html")
     public String getTable1Jsp(){
-        return "admin/table_1";
+        return "admin/notice-settings";
     }
 
     //获取用户列表页面
@@ -227,13 +234,25 @@ public class AdminController {
     //批量删除用户
     @RequestMapping("/deleteUser.do")
     @ResponseBody
-    public Map<String,Boolean> deleteUser(String[] userIds){
+    public Map<String,Object> deleteUser(String[] userIds,HttpSession session){
 
-        boolean flag=userService.delete(userIds);
+        String success="0";
 
-        Map<String,Boolean> map=new HashMap<>();
+        //获取当前登录账号的id
+        String id=((User)session.getAttribute("admin")).getId();
 
-        map.put("success",flag);
+        if(userService.delete(userIds)){
+            if (Arrays.asList(userIds).contains(id)){
+                session.removeAttribute("admin");
+                success="2";
+            }else{
+                success="1";
+            }
+        }
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("success",success);
 
         return map;
 
@@ -397,23 +416,159 @@ public class AdminController {
 
     }
 
+    //重置用户密码
+    @RequestMapping("/resetPwd.do")
+    @ResponseBody
+    public Map<String,Object> resetPwd(String[] userIds,HttpSession session){
+
+        String success="0";
+        Map map=new HashMap();
+
+        //获取当前登录的管理员的id
+        String id=((User)session.getAttribute("admin")).getId();
+        //登录密码8个0
+        String loginPwd=MD5Util.getMD5("00000000");
+
+        if(userService.resetPwd(userIds,loginPwd)){
+            //判断当前登录账号是否重置
+            if (Arrays.asList(userIds).contains(id)){
+                session.removeAttribute("admin");
+                success="1";
+            }else{
+                success="2";
+            }
+        }
+
+        map.put("success",success);
+
+        return map;
+
+    }
+
+    //更新用户权限
+    @RequestMapping("/updateUserPower.do")
+    @ResponseBody
+    public Map<String,Object> updateUserPower(User user,HttpSession session){
+
+        String success="0";
+        Map map=new HashMap();
+
+        //获取当前登录的管理员的id
+        String id=((User)session.getAttribute("admin")).getId();
+
+
+        if(userService.updatePower(user)){
+            //判断当前登录账号是否重置
+            if (id.equals(user.getId())){
+                session.removeAttribute("admin");
+                success="2";
+            }else{
+                success="1";
+            }
+        }
+
+        map.put("success",success);
+
+        return map;
+
+    }
+
+    //获取招领信息
+    @RequestMapping("/getNoticeList.do")
+    @ResponseBody
+    public Map<String,Object> getNoticeList(int pageNo,int pageSize,String keyword){
+
+        Map<String,Object> map=new HashMap<>();
+
+        int total=noticeService.queryCountByKeyword(keyword);
+
+        List<Notice> noticeList=noticeService.queryAllByKeyword(pageNo,pageSize,keyword);
+
+        map.put("total",total);
+        map.put("noticeList",noticeList);
+
+        return map;
+
+    }
+
+    //添加公告
+    @RequestMapping("/addNotice.do")
+    @ResponseBody
+    public Map<String,Object> addNotice(Notice notice){
+
+        notice.setId(UUIDUtil.getUUID());
+        notice.setCreateTime(DateTimeUtil.getSysTime());
+        notice.setState(0);
+
+        boolean success=noticeService.addNotice(notice);
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("success",success);
+
+        return map;
+
+    }
+
+    //批量删除系统公告
+    @RequestMapping("/deleteNotice.do")
+    @ResponseBody
+    public Map<String,Object> deleteNotice(@RequestParam("id") String[] ids){
+        boolean success=noticeService.deleteNotice(ids);
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("success",success);
+
+        return map;
+    }
+
+    //获取单条公告详细信息
+    @RequestMapping("/getNoticeById.do")
+    @ResponseBody
+    public Notice getNoticeById(String id){
+
+        Notice notice=noticeService.queryById(id);
+
+        return notice;
+
+    }
+
+    //保存公告修改
+    @RequestMapping("/editNotice.do")
+    @ResponseBody
+    public Map<String,Object> editNotice(Notice notice){
+
+        boolean success=noticeService.editNotice(notice);
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("success",success);
+
+        return map;
+
+    }
+
+    //修改公告发布状态
+    @RequestMapping("/updateNoticeState.do")
+    @ResponseBody
+    public Map<String,Object> updateNoticeState(Notice notice){
+
+        notice.setPublishTime(DateTimeUtil.getSysTime());
+
+        boolean success=noticeService.updateNoticeState(notice);
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("success",success);
+
+        return map;
+
+    }
+
     @RequestMapping("/404.html")
     public String get404Jsp(){
         return "admin/404";
     }
 
-    @RequestMapping("/tab.html")
-    public String getTabJsp(){
-        return "admin/tab";
-    }
-
-    /*@RequestMapping("/")
-    public String get(){
-        return "admin/";
-    }
-
-    @RequestMapping("/")
-    public String get(){
-        return "admin/";
-    }*/
 }

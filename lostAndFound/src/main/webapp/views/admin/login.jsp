@@ -34,7 +34,7 @@
     <div class="layui-val-icon larry-login">
     	<div class="layui-code-box">
     		<input type="text" id="code" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">
-            <img src="imgCode/code.do" alt="" class="verifyImg" id="verifyImg" onclick="changeCode(this)">
+            <img src="imgCode/code.do" alt="" class="verifyImg" id="verifyImg" onclick="changeCode(this)" title="看不清，单击更换" >
     	</div>
 		<!--更换验证码-->
 		<script type="text/javascript">

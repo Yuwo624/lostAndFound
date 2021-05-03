@@ -147,4 +147,8 @@
     <update id="updateById">
         update  tbl_pickthings set name=#{name},pickDate=#{pickDate},pickPlace=#{pickPlace},state=#{state} where id=#{id}
     </update>
+
+    <delete id="deleteByUid">
+        delete from tbl_pickthings where user=#{id}
+    </delete>
 </mapper>

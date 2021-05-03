@@ -26,4 +26,8 @@ public interface UserService {
     int queryAllCount(String keyword);
 
     boolean delete(String[] userIds);
+
+    boolean resetPwd(String[] userIds,String loginPwd);
+
+    boolean updatePower(User user);
 }

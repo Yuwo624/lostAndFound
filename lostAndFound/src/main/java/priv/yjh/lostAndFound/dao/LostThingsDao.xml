@@ -144,4 +144,8 @@
     <update id="updateById">
         update tbl_lostthings set name=#{name},lostDate=#{lostDate},lostPlace=#{lostPlace},state=#{state} where id=#{id}
     </update>
+
+    <delete id="deleteByUid">
+        delete from tbl_lostthings where user=#{id}
+    </delete>
 </mapper>
